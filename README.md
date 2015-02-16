@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CSS Playing Cards
 =================
 
@@ -89,3 +90,7 @@ Credits
 
 * The faces' images are taken from [svg-cards](http://svg-cards.sourceforge.net/)
 * One of the cards back images was taken from http://www.squidfingers.com/patterns/
+=======
+# Insertion-Sort
+Interactive visual of the insertion sort algorithm on five playing cards.
+>>>>>>> 43b41f6c8314dd3b9674d6e9784aad8aaa6e6f18
