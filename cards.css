@@ -30,6 +30,7 @@
     font-family: 'Open Sans Condensed', Arial, sans-serif;
     position: relative;
     background-color: #fff;
+    background-image: linear-gradient(to bottom right, white, #eee);
     -moz-box-shadow: .2em .2em .5em #9E9E9E;
     -webkit-box-shadow: .2em .2em .5em #9E9E9E;
     box-shadow: .2em .2em .5em #9E9E9E;
