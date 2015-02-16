@@ -35,16 +35,17 @@ $(function(){
 
   // swaps the card with the previous sibling, then executes a done function.
   var swapWithPrevCard = function(card, done){
-    var $card = card;
-    var $prev = $card.prev(); 
+    var $card = card,
+        $prev = $card.prev(); 
     if(!$prev.length){ return; } 
     done = done || function(){};
     var distance = $card.position().left - $prev.position().left;
     
     $card.animate({'left': '-' + distance + 'px'}, 
       { duration: 500,
+        easing: 'easeInOutCubic',
         start: function(){
-          $prev.animate({'left': distance + 'px'}, 500); 
+          $prev.animate({'left': distance + 'px'}, 500, 'easeInOutCubic'); 
         },
         done: function(){
           $card.css('left', 'auto');
@@ -54,17 +55,20 @@ $(function(){
         }
       });
   };
+
+  // swaps the card with the next sibling, then executes a done function.
   var swapWithNextCard = function(card, done){
-    var $card = card;
-    var $next = $card.next(); 
+    var $card = card,
+        $next = $card.next(); 
     if(!$next.length){ return; } 
     done = done || function(){};
     var distance = $next.position().left - $card.position().left;
     
     $card.animate({'left': distance + 'px'}, 
       { duration: 500,
+        easing: 'easeInOutCubic',
         start: function(){
-          $next.animate({'left': '-' + distance + 'px'}, 500); 
+          $next.animate({'left': '-' + distance + 'px'}, 500, 'easeInOutCubic'); 
         },
         done: function(){
           $card.css('left', 'auto');
