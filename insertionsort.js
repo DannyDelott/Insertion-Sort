@@ -33,10 +33,12 @@ $(function(){
 
   };
 
-  var swapWithPrevCard = function(card){
+  // swaps the card with the previous sibling, then executes a done function.
+  var swapWithPrevCard = function(card, done){
     var $card = card;
     var $prev = $card.prev(); 
     if(!$prev.length){ return; } 
+    done = done || function(){};
     var distance = $card.position().left - $prev.position().left;
     
     $card.animate({'left': '-' + distance + 'px'}, 
@@ -48,13 +50,15 @@ $(function(){
           $card.css('left', 'auto');
           $prev.css('left', 'auto');
           $card.insertBefore($prev); 
+          done();
         }
       });
   };
-  var swapWithNextCard = function(card){
+  var swapWithNextCard = function(card, done){
     var $card = card;
     var $next = $card.next(); 
     if(!$next.length){ return; } 
+    done = done || function(){};
     var distance = $next.position().left - $card.position().left;
     
     $card.animate({'left': distance + 'px'}, 
@@ -66,8 +70,17 @@ $(function(){
           $card.css('left', 'auto');
           $next.css('left', 'auto');
           $card.insertAfter($next); 
+          done();
         }
       });
+  };
+
+  var insertionSort = function(){
+    var str = '';
+    _.each($cards.children(), function(card, i, arr){
+      str += ', ' + $(card).find('.rank').text();
+    });
+    console.log(str);
   };
 
   /* **************
