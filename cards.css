@@ -12,6 +12,7 @@
 .playingCards {
   float:left;
   position:relative;
+  cursor:pointer;
 }
 .playingCards .card {
     display: inline-block;
