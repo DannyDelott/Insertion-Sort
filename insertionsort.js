@@ -6,12 +6,14 @@ $(function(){
   
   var $cards = $('#cards');
   var $playingCards = $('.playingCards');
+  var isSwapping = false;
 
   /* ****************
    * EVENT HANDLERS *
    * ****************/
 
   $playingCards.on('click', this, function(){
+    if(isSwapping){ return; }
     swapWithPrevCard($(this));
   });
 
@@ -38,6 +40,7 @@ $(function(){
     var $card = card,
         $prev = $card.prev(); 
     if(!$prev.length){ return; } 
+    isSwapping = true;
     done = done || function(){};
     var distance = $card.position().left - $prev.position().left;
     
@@ -51,6 +54,7 @@ $(function(){
           $card.css('left', 'auto');
           $prev.css('left', 'auto');
           $card.insertBefore($prev); 
+          isSwapping = false;
           done();
         }
       });
