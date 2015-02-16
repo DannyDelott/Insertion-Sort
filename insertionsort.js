@@ -3,18 +3,26 @@ $(function(){
   /* ******************
    * GLOBAL VARIABLES *
    * ******************/
+  
   var $cards = $('#cards');
+  var $playingCards = $('.playingCards');
+
+  /* ****************
+   * EVENT HANDLERS *
+   * ****************/
+
+  $playingCards.on('click', this, function(){
+    swapWithPrevCard($(this));
+  });
 
   /* ******************
    * HELPER FUNCTIONS *
    * ******************/
   
-  // Generate a random number
   var rand = function(max){
     return Math.floor(Math.random() * max);
   }; 
 
-  // Fade out, shuffle cards, fade in
   var shuffleCards = function(){
     $cards.fadeOut('slow', function(){
       _.each($cards.children(), function(card){
@@ -22,10 +30,44 @@ $(function(){
       });
       $cards.fadeIn(1000);
     });
+
   };
 
-  // Swap two cards
-  var swapCards = function($card1, $card2){
+  var swapWithPrevCard = function(card){
+    var $card = card;
+    var $prev = $card.prev(); 
+    if(!$prev.length){ return; } 
+    var distance = $card.position().left - $prev.position().left;
+    
+    $card.animate({'left': '-' + distance + 'px'}, 
+      { duration: 500,
+        start: function(){
+          $prev.animate({'left': distance + 'px'}, 500); 
+        },
+        done: function(){
+          $card.css('left', 'auto');
+          $prev.css('left', 'auto');
+          $card.insertBefore($prev); 
+        }
+      });
+  };
+  var swapWithNextCard = function(card){
+    var $card = card;
+    var $next = $card.next(); 
+    if(!$next.length){ return; } 
+    var distance = $next.position().left - $card.position().left;
+    
+    $card.animate({'left': distance + 'px'}, 
+      { duration: 500,
+        start: function(){
+          $next.animate({'left': '-' + distance + 'px'}, 500); 
+        },
+        done: function(){
+          $card.css('left', 'auto');
+          $next.css('left', 'auto');
+          $card.insertAfter($next); 
+        }
+      });
   };
 
   /* **************

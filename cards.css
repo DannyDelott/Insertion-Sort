@@ -11,6 +11,7 @@
 ********************************************************************/
 .playingCards {
   float:left;
+  position:relative;
 }
 .playingCards .card {
     display: inline-block;
